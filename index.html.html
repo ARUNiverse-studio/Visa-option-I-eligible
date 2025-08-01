@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My UK Visa Eligibility for UX/UI Roles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate -->
+    <!-- Application Structure Plan: A single-page dashboard design. The core interaction is a set of buttons representing different visa scenarios (ISL, New Entrant). Clicking a button dynamically updates a central display card with the specific salary, benefits, and requirements for that scenario. This task-oriented approach is chosen for speed and clarity, allowing busy recruiters to get immediate answers for their specific candidate type. It's more efficient than reading a linear report. The page also includes a static comparison table and official links for comprehensive reference and verification. -->
+    <!-- Visualization & Content Choices: Report Info: Visa route details (salary, benefits). Goal: Compare options and find the best one. Viz/Presentation: Interactive buttons and a dynamic display card. Interaction: User clicks a button, JS updates the card. Justification: This provides immediate, focused feedback, which is more engaging and efficient than a static table. Library/Method: Vanilla JS for interaction, Tailwind for styling. Report Info: SOC Code & Official Links. Goal: Inform and provide verification. Viz/Presentation: Clearly displayed text and a formatted list of links. Justification: Direct, clear, and standard presentation for essential information. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .active-button {
+            background-color: #0f172a !important; /* slate-900 */
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+        }
+        .display-card {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-6xl">
+
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900">My UK Visa Eligibility</h1>
+            <p class="mt-2 text-lg text-slate-600">A Guide for Employers: Sponsoring a UX/UI Designer</p>
+        </header>
+
+        <main>
+            <section id="interactive-guide" class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold text-slate-900">Explore My Sponsorship Options</h2>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">As a candidate who qualifies as a 'New Entrant', I have flexible visa sponsorship options. Select a route below to see how my eligibility benefits your hiring process.</p>
+                </div>
+
+                <div class="mt-8 flex flex-wrap justify-center gap-3 sm:gap-4" id="route-selector">
+                    <button data-route="new-entrant" class="route-btn px-6 py-3 text-base font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full transition-all duration-300">
+                        My "New Entrant" Status
+                    </button>
+                    <button data-route="isl" class="route-btn px-6 py-3 text-base font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full transition-all duration-300">
+                        Immigration Salary List (ISL)
+                    </button>
+                </div>
+
+                <div id="display-card-container" class="mt-10">
+                    <div id="display-card" class="display-card bg-slate-50 border border-slate-200 rounded-xl p-6 sm:p-8">
+                        <h3 id="card-title" class="text-2xl font-bold text-slate-900"></h3>
+                        <div class="mt-6 grid md:grid-cols-2 gap-6 items-center">
+                            <div class="text-center bg-white p-6 rounded-lg border border-slate-200">
+                                <p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Minimum Required Salary</p>
+                                <p id="card-salary" class="text-4xl font-bold text-slate-900 mt-2"></p>
+                            </div>
+                            <div id="card-benefits">
+                                <h4 class="font-semibold text-slate-800">Benefit to You as an Employer</h4>
+                                <p id="card-description" class="mt-1 text-slate-600"></p>
+                            </div>
+                        </div>
+                         <div class="mt-6 border-t border-slate-200 pt-4">
+                            <p class="text-sm text-slate-600"><span class="font-semibold">My Occupation Code:</span> All UX/UI roles fall under SOC 2142 - Graphic and multimedia designers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comparison" class="mt-12">
+                 <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900">My Visa Options: At-a-Glance</h2>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">This table summarizes the benefits of sponsoring me under the two most advantageous routes. The 'New Entrant' option provides the greatest flexibility for your budget.</p>
+                </div>
+                <div class="overflow-x-auto bg-white p-4 rounded-2xl shadow-lg border border-slate-200">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="p-4 font-semibold text-slate-700">My Visa Route</th>
+                                <th class="p-4 font-semibold text-slate-700">Minimum Salary</th>
+                                <th class="p-4 font-semibold text-slate-700">Benefit to Employer</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="font-bold bg-sky-50">
+                                <td class="p-4 text-sky-800">New Entrant</td>
+                                <td class="p-4 text-sky-800">£30,960 per year</td>
+                                <td class="p-4 text-sky-700">Most advantageous route. Provides maximum flexibility on starting salary for a junior or graduate hire.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Immigration Salary List (ISL)</td>
+                                <td class="p-4">£33,400 per year</td>
+                                <td class="p-4 text-slate-600">Offers a reduced salary threshold and a discounted visa application fee for you.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="resources" class="mt-12">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900">Official Government Verification</h2>
+                    <p class="mt-2 text-slate-600 max-w-2xl mx-auto">You can verify all information presented here using the official GOV.UK sources linked below.</p>
+                </div>
+                <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="https://www.gov.uk/government/publications/skilled-worker-visa-eligible-occupations/skilled-worker-visa-eligible-occupations-and-codes" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-slate-200">
+                        <h4 class="font-semibold text-slate-800">Eligible Occupations & Codes</h4>
+                        <p class="text-sm text-slate-500 mt-1">Confirm that SOC 2142 is eligible for the Skilled Worker route.</p>
+                    </a>
+                    <a href="https://www.gov.uk/government/publications/skilled-worker-visa-immigration-salary-list/skilled-worker-visa-immigration-salary-list" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-slate-200">
+                        <h4 class="font-semibold text-slate-800">Immigration Salary List</h4>
+                        <p class="text-sm text-slate-500 mt-1">See the official list of roles (including SOC 2142) with reduced salary thresholds.</p>
+                    </a>
+                    <a href="https://www.gov.uk/skilled-worker-visa/when-you-can-be-paid-less" target="_blank" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-slate-200">
+                        <h4 class="font-semibold text-slate-800">Salary Discounts Explained</h4>
+                        <p class="text-sm text-slate-500 mt-1">Read the criteria for the New Entrant discount and other salary tradeable points.</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 pt-8 border-t border-slate-200">
+            <p class="text-sm text-slate-500">This tool is for informational purposes. All data is based on UK immigration rules as of August 1, 2025. Always consult the official GOV.UK sources for the most current regulations.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const routeData = {
+                'new-entrant': {
+                    title: 'My "New Entrant" Status',
+                    salary: '£30,960',
+                    description: 'As a New Entrant, I am eligible for sponsorship with this minimum salary. This route offers you the most flexibility for hiring junior or graduate talent.'
+                },
+                'isl': {
+                    title: 'Immigration Salary List (ISL) Route',
+                    salary: '£33,400',
+                    description: 'My role is on the Immigration Salary List (ISL), which allows for a reduced salary threshold and provides you with a discount on the visa application fee.'
+                }
+            };
+
+            const selector = document.getElementById('route-selector');
+            const buttons = selector.querySelectorAll('.route-btn');
+            const cardTitle = document.getElementById('card-title');
+            const cardSalary = document.getElementById('card-salary');
+            const cardDescription = document.getElementById('card-description');
+            const displayCard = document.getElementById('display-card');
+
+            function updateDisplay(routeName) {
+                const data = routeData[routeName];
+                
+                cardTitle.textContent = data.title;
+                cardSalary.textContent = data.salary;
+                cardDescription.textContent = data.description;
+
+                buttons.forEach(btn => {
+                    if (btn.dataset.route === routeName) {
+                        btn.classList.add('active-button');
+                    } else {
+                        btn.classList.remove('active-button');
+                    }
+                });
+
+                displayCard.classList.remove('bg-slate-50', 'bg-sky-50', 'bg-amber-50');
+                if (routeName === 'new-entrant') {
+                    displayCard.classList.add('bg-sky-50');
+                } else if (routeName === 'isl') {
+                    displayCard.classList.add('bg-amber-50');
+                } else {
+                    displayCard.classList.add('bg-slate-50');
+                }
+            }
+
+            selector.addEventListener('click', function(e) {
+                if (e.target.classList.contains('route-btn')) {
+                    const routeName = e.target.dataset.route;
+                    updateDisplay(routeName);
+                }
+            });
+            
+            updateDisplay('new-entrant');
+        });
+    </script>
+</body>
+</html>
